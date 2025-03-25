@@ -1,0 +1,53 @@
+﻿@* @model TopicManager.Models.Subject *@
+
+@* <h2>Subject Details</h2> *@
+
+@* <div> *@
+@*     <h4>@Model.Name</h4> *@
+@*     <p>@Model.Description</p> *@
+
+@*     <h5>Subtopics:</h5> *@
+@*     <ul> *@
+@*         @foreach (var subtopic in Model.Subtopics) *@
+@*         { *@
+@*                 <li>@subtopic.Name - @subtopic.Description</li> *@
+@*         } *@
+@*     </ul> *@
+
+@*     <a asp-action="Index" class="btn btn-secondary">Back to List</a> *@
+@* </div> *@
+@model TopicManager.Models.Subject
+
+<h2>Subject Details</h2>
+
+<div>
+    <h4>@Model.Name</h4>
+    <p>@Model.Description</p>
+
+    <h5>Subtopics:</h5>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var subtopic in Model.Subtopics)
+            {
+                <tr>
+                    <td>@subtopic.Name</td>
+                    <td>@subtopic.Description</td>
+                    <td>
+                        <a asp-controller="Subtopics" asp-action="Edit" asp-route-id="@subtopic.Id" class="btn btn-warning">Edit</a>
+                        <a asp-controller="Subtopics" asp-action="Delete" asp-route-id="@subtopic.Id" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <a asp-controller="Subtopics" asp-action="Create" asp-route-subjectId="@Model.Id" class="btn btn-primary">Add New Subtopic</a>
+    <a asp-action="Index" class="btn btn-secondary">Back to Subjects List</a>
+</div>
